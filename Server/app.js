@@ -16,7 +16,7 @@ const {addProducts} = require('./controllers/product');
 const productRouter = require('./routes/product');
 // >>>>>>> eebfefeba9ef9366b0bb3db4091148d66ac1cae4
 
-// app.use(require('./router/auth'));
+
 
 // Configure CORS to allow requests from your frontend domain (http://localhost:3000)
 require('./DB/database');
