@@ -6,23 +6,19 @@ const productSchem = new mongoose.Schema({
         require: [true, "please Enter Product Name"],
         trim: true
     },
-    images: [{
-        public_id: {
-            type: String,
-            require: true
-        },
+    images: {
         url: {
             type: String,
             require: true
         }
-    }],
+    },
     description: {
         type: String,
         require: [true, "please Enter Product description"]
     },
     quantity : {
         type : Number,
-        require : [true , "Please Enter Product Stock"],
+        require : [true , "Please Enter Product quantity"],
         maxLength : [4 , "Stock cannot exceed 4 figure"],
         default : 1
     },

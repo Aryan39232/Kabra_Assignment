@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Card } from '../component'
-
+import { Store } from '../store'
+import { useDispatch, useSelector } from 'react-redux';
 const cardData =[
   {
     link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ySFRhc4HgKeI5MZg4s5mB8_-FSdGS1MqMIvb1TqP4Q&s',
@@ -47,7 +48,9 @@ const cardData =[
 ];
 
 const ProductList = () => {
-  const [products, setProducts] = useState(cardData)
+  const productsList = useSelector((state) => state.list?.productList );
+
+  const [products, setProducts] = useState(productsList)
   return (
     <div class="row row-cols-2 row-cols-md-5 g-4" style={{margin:"1rem", padding:"1rem", marginInline:"1rem"}}>
       {

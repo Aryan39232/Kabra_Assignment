@@ -36,6 +36,17 @@ exports.updateAddToCart = async (req, res) => {
     }
 }
 
+exports.delteCarts = async (req , res) => {
+    try {
+        const { cartItemId, quantity } = req.body;
+        const findItem = Cart.findById(cartItemId);
+        findItem.remove();
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 exports.listCarts = async (req, res) => {
     try {
         const cartItems = await Cart.find();

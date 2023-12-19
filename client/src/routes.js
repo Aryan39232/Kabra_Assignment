@@ -10,7 +10,6 @@ const routes = [
     path: "/cart",
     element: <ProductCart/>,
     
-    // Layout: <PageView />
   },
   {
     path: "/create-product",
