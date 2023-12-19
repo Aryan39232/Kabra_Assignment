@@ -1,8 +1,11 @@
+import axios from 'axios';
 import axiosInstance from './axiosController';
 
 export const createProduct = async(payload) => {
   try {
-    const response = await axiosInstance.post('/create-product');
+    console.log("create " ,payload);
+    const response = await axios.post('http://localhost:5000/api/create-product',payload);
+    console.log(response);
     return {status: "success", data: response};
   } catch (error) {
     console.error(error);

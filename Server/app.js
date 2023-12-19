@@ -7,11 +7,13 @@ var cors = require('cors')
 
 const product = require('./models/product');
 const cart = require('./models/carts');
-
+const {addProducts} = require('./controllers/product');
+const productRouter = require('./routes/product');
 
 // app.use(require('./router/auth'));
 
 // Configure CORS to allow requests from your frontend domain (http://localhost:3000)
+require('./DB/database');
 app.use(
     cors({
       origin: 'http://localhost:3000', // Replace with your frontend URL in production
@@ -26,11 +28,10 @@ app.use(
 dotenv.config({ path : './config.env'});
 
 
-require('./DB/database');
-
-app.use('/api' , product);
-app.use('/api' , cart);
 app.use(express.json());
+app.use('/api',productRouter);
+// app.use('/api' , cart);
+
 
 
 

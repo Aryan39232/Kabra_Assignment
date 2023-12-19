@@ -4,8 +4,8 @@ const router = express.Router();
 
 
 
-router.route("/create-product").post(addProducts);
+router.post('/create-product',addProducts);
 router.route("/").get(listProducts)
 
 
-export default router;
+module.exports = router;
