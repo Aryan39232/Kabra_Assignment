@@ -5,8 +5,8 @@ const PORT = process.env.PORT || 5000;
 var cors = require('cors')
 
 
-const product = require('./models/product');
-const cart = require('./models/carts');
+const product = require('./routes/product');
+const cart = require('./routes/cart');
 
 
 // app.use(require('./router/auth'));
@@ -30,6 +30,7 @@ require('./DB/database');
 
 app.use('/api' , product);
 app.use('/api' , cart);
+
 app.use(express.json());
 
 
@@ -37,3 +38,4 @@ app.use(express.json());
 app.listen(PORT , () =>{
     console.log(`server is running at port no ${PORT}`);
 });
+
