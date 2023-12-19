@@ -1,11 +1,40 @@
-const express = require('express');
-const { addProducts, listProducts } = require('../controllers/product');
-const router = express.Router();
+const express = require('express')
+const app = express()
+const dotenv = require("dotenv")
+const PORT = process.env.PORT || 5000;
+var cors = require('cors')
+
+
+const product = require('./models/product');
+const cart = require('./models/carts');
+const {addProducts} = require('./controllers/product');
+const productRouter = require('./routes/product');
+
+// app.use(require('./router/auth'));
+
+// Configure CORS to allow requests from your frontend domain (http://localhost:3000)
+require('./DB/database');
+app.use(
+    cors({
+      origin: 'http://localhost:3000', // Replace with your frontend URL in production
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+      optionsSuccessStatus: 204
+    })
+);
 
 
 
-router.post('/create-product',addProducts);
-router.route("/").get(listProducts)
+dotenv.config({ path : './config.env'});
 
 
-module.exports = router;
+app.use(express.json());
+app.use('/api',productRouter);
+// app.use('/api' , cart);
+
+
+
+
+app.listen(PORT , () =>{
+    console.log(`server is running at port no ${PORT}`);
+});

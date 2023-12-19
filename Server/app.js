@@ -5,13 +5,18 @@ const PORT = process.env.PORT || 5000;
 var cors = require('cors')
 
 
+
+const product = require('./routes/product');
+const cart = require('./routes/cart');
+
+// =======
 const product = require('./models/product');
 const cart = require('./models/carts');
 const {addProducts} = require('./controllers/product');
 const productRouter = require('./routes/product');
+
 const cartRouter = require('./routes/cart');
 
-// app.use(require('./router/auth'));
 
 // Configure CORS to allow requests from your frontend domain (http://localhost:3000)
 require('./DB/database');
@@ -29,6 +34,13 @@ app.use(
 dotenv.config({ path : './config.env'});
 
 
+// <<<<<<< HEAD
+require('./DB/database');
+
+app.use('/api' , product);
+app.use('/api' , cart);
+
+
 app.use(express.json());
 app.use('/api',productRouter);
 app.use('/api/cart' , cartRouter);
@@ -37,3 +49,4 @@ app.use('/api/cart' , cartRouter);
 app.listen(PORT , () =>{
     console.log(`server is running at port no ${PORT}`);
 });
+
