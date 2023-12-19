@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Card } from '../component'
+import { useSelector } from 'react-redux';
 
-const cardData =[
+const cardDataMock =[
   {
     link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ySFRhc4HgKeI5MZg4s5mB8_-FSdGS1MqMIvb1TqP4Q&s',
     title: 'Laptop',
@@ -48,13 +49,16 @@ const cardData =[
 
 function ProductCart() {
   const [productAdded, setProductsAdded] = useState([])
+  const cartData = useSelector((state)=>state.cart);
+
+  console.log('cart ', cartData);
   return (
     <div>
       {
-        productAdded?.length>0?(
+        cartData?.length>0?(
           <div class="row row-cols-2 row-cols-md-5 g-4" style={{margin:"1rem", padding:"1rem", marginInline:"1rem"}}>
             {
-              productAdded?.map((ele, idx) => {
+              cartData?.map((ele, idx) => {
                 return(
                   <Card props={ele} key={idx}/>
                 )

@@ -5,6 +5,7 @@ exports.addProducts = async (req, res) => {
 
     try {
         const { name, image, description, quantity, price } = req.body;
+        console.log(req.body);
         if (!name || !image || !description || !quantity || !price) {
             return res.this.status(400).json("Please Add all Details")
         }

@@ -1,6 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../store/modules/cart';
 
 const Card = ({props}) => {
+
+  const dispatch = useDispatch();
+  const handleAddToCart = async()=>{
+    dispatch(addToCart({...props}));
+  }
   return (
     <div className='col'>
       <div className="card h-100" style={{width:"20rem"}}>
@@ -14,7 +21,7 @@ const Card = ({props}) => {
           </div>
         </div>
         <div className="card-body" style={{display:"flex", justifyContent:"space-between", marginInline:"1rem", alignItems:"flex-end"}}>
-          <a href="#" style={{height:"fit-content"}} className="btn btn-primary ">Add to Cart</a>
+          <button  style={{height:"fit-content"}} className="btn btn-primary " onClick={handleAddToCart}>Add to Cart</button>
           <a href="#" style={{height:"fit-content"}} className="btn btn-danger">Remove</a>
         </div>
       </div>
