@@ -5,6 +5,7 @@ const Product = require('../models/product');
 exports.addToCart = async (req, res) => {
     try {
         const { productId, quantity } = req.body;
+        console.log(req.body);
         const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
@@ -49,7 +50,7 @@ exports.delteCarts = async (req , res) => {
 
 exports.listCarts = async (req, res) => {
     try {
-        const cartItems = await Cart.find();
+        const cartItems = await Cart.find().populate('productId');
         res.status(200).json(cartItems);
     } catch (error) {
         res.status(500).json({ error: error.message });

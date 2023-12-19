@@ -1,12 +1,24 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../store/modules/cart';
+import { useState } from 'react';
+import axios from 'axios';
 
-const Card = ({props}) => {
+const Card = ({props,quantity}) => {
 
   const dispatch = useDispatch();
+  const [qty, setqty] = useState(quantity?quantity:0);
+
   const handleAddToCart = async()=>{
     dispatch(addToCart({...props}));
+
+    try {
+      
+      const res = await axios.post('http://localhost:5000/api/cart/add-to-cart',{productId:props._id, quantity:qty });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div className='col'>
@@ -20,6 +32,7 @@ const Card = ({props}) => {
           <p className="list-group-item">{props.price}</p>
           </div>
         </div>
+        <input type="number" onChange={(e)=>setqty(e.target.value)} value={qty} />
         <div className="card-body" style={{display:"flex", justifyContent:"space-between", marginInline:"1rem", alignItems:"flex-end"}}>
           <button  style={{height:"fit-content"}} className="btn btn-primary " onClick={handleAddToCart}>Add to Cart</button>
           <a href="#" style={{height:"fit-content"}} className="btn btn-danger">Remove</a>

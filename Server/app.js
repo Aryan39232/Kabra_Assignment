@@ -9,6 +9,7 @@ const product = require('./models/product');
 const cart = require('./models/carts');
 const {addProducts} = require('./controllers/product');
 const productRouter = require('./routes/product');
+const cartRouter = require('./routes/cart');
 
 // app.use(require('./router/auth'));
 
@@ -30,9 +31,7 @@ dotenv.config({ path : './config.env'});
 
 app.use(express.json());
 app.use('/api',productRouter);
-// app.use('/api' , cart);
-
-
+app.use('/api/cart' , cartRouter);
 
 
 app.listen(PORT , () =>{

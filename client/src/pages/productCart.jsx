@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from '../component'
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const cardDataMock =[
   {
@@ -48,19 +49,32 @@ const cardDataMock =[
 ];
 
 function ProductCart() {
-  const [productAdded, setProductsAdded] = useState([])
+  const [productAdded, setProductsAdded] = useState([]);
+  const [cart, setCart] = useState([]);
   const cartData = useSelector((state)=>state.cart);
 
-  console.log('cart ', cartData);
+  useEffect(() => {
+    const getCart = async()=>{
+      try {
+        const {data} = await axios.get('http://localhost:5000/api/cart/get');
+        setCart(data);
+      } catch (error) {
+        
+      }
+    }
+    getCart();
+  }, [])
+  
   return (
     <div>
       {
-        cartData?.length>0?(
+        cart?.length>0?(
           <div class="row row-cols-2 row-cols-md-5 g-4" style={{margin:"1rem", padding:"1rem", marginInline:"1rem"}}>
             {
-              cartData?.map((ele, idx) => {
+              cart?.map((ele, idx) => {
                 return(
-                  <Card props={ele} key={idx}/>
+                  <Card props={ele.productId} key={idx} quantity={ele.quantity}/>
+
                 )
               })
             }

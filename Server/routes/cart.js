@@ -1,11 +1,11 @@
-import { addToCart, listCarts, updateAddToCart } from '../controllers/carts';
+const { addToCart, listCarts, updateAddToCart } =  require('../controllers/carts');
 
 const express = require('express');
 const router = express.Router();
 
 
-router.post('/cart', addToCart);
-router.put('/cart', updateAddToCart);
-router.get('/cart', listCarts);
+router.post('/add-to-cart', addToCart);
+router.put('/update-cart', updateAddToCart);
+router.get('/get', listCarts);
 
-export default router;
+module.exports =  router;
